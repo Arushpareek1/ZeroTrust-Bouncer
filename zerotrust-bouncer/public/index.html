@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeroTrust Bouncer | Security Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-glow"></div>
+
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-icon">⬡</span>
+            <span>ZERO<span class="accent">TRUST</span> BOUNCER</span>
+        </div>
+        <div class="top-status">
+            <span class="status-dot"></span>
+            SYSTEM ONLINE
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="auth-section" class="auth-layout">
+            <div class="hero">
+                <div class="eyebrow">NEXT-GEN ACCESS SECURITY</div>
+                <h1>Trust nothing.<br><span>Verify everything.</span></h1>
+                <p>A multi-layer security system that evaluates access requests using authentication, device signals and risk analysis.</p>
+                <div class="feature-pills">
+                    <span>◈ Risk Analysis</span>
+                    <span>◈ 2FA Protection</span>
+                    <span>◈ Rate Limiting</span>
+                </div>
+            </div>
+
+            <div class="panel auth-panel">
+                <div class="tabs">
+                    <button id="login-tab" class="tab active">LOGIN</button>
+                    <button id="register-tab" class="tab">REGISTER</button>
+                </div>
+
+                <h2 id="auth-title">Welcome back</h2>
+                <p class="muted" id="auth-subtitle">Authenticate to access your dashboard.</p>
+
+                <form id="auth-form">
+                    <label for="username">USERNAME</label>
+                    <input id="username" type="text" placeholder="Enter username" required>
+
+                    <label for="password">PASSWORD</label>
+                    <input id="password" type="password" placeholder="Enter password" required>
+
+                    <div id="password-meter" class="password-meter hidden">
+                        <div class="meter-track"><div id="meter-fill"></div></div>
+                        <small id="meter-label">Password strength</small>
+                    </div>
+
+                    <button id="auth-submit" class="primary-btn" type="submit">SECURE LOGIN →</button>
+                </form>
+
+                <p id="auth-message" class="message"></p>
+                <p class="small-note">Protected by ZeroTrust Bouncer security layers.</p>
+            </div>
+        </section>
+
+        <section id="dashboard" class="hidden">
+            <div class="welcome-row">
+                <div>
+                    <div class="eyebrow">SECURITY OVERVIEW</div>
+                    <h1>Welcome, <span id="display-user">User</span></h1>
+                    <p class="muted">Your access security dashboard.</p>
+                </div>
+                <button id="logout-btn" class="outline-btn">LOG OUT ↗</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">RISK SCORE</span>
+                    <div class="stat-value" id="risk-score">--<small>/100</small></div>
+                    <p class="muted">Authentication risk</p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">ACCESS DECISION</span>
+                    <div class="stat-value decision" id="decision">--</div>
+                    <p class="muted">Security engine result</p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">AUTHENTICATION</span>
+                    <div class="stat-value success-text">ACTIVE</div>
+                    <p class="muted">Login successful</p>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Risk Analysis</h3>
+                        <span class="mini-tag">LIVE RESULT</span>
+                    </div>
+                    <div id="risk-reasons" class="reason-list">
+                        <p class="muted">No risk factors reported.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Device Intelligence</h3>
+                        <span class="mini-tag">CLIENT INFO</span>
+                    </div>
+                    <div class="info-row"><span>Browser</span><strong id="browser-info">Loading...</strong></div>
+                    <div class="info-row"><span>Operating system</span><strong id="os-info">Loading...</strong></div>
+                    <div class="info-row"><span>Device type</span><strong id="device-info">Loading...</strong></div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Location Intelligence</h3>
+                        <span class="mini-tag">IP LOOKUP</span>
+                    </div>
+                    <div class="info-row"><span>IP address</span><strong id="ip-info">Checking...</strong></div>
+                    <div class="info-row"><span>Location</span><strong id="location-info">Checking...</strong></div>
+                    <p class="small-note">Location may be unavailable for local or private IP addresses.</p>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Two-Factor Authentication</h3>
+                        <span class="mini-tag">2FA</span>
+                    </div>
+                    <p class="muted">Add another layer of verification to your account.</p>
+                    <button id="setup-2fa" class="primary-btn">SET UP 2FA →</button>
+                    <div id="twofa-area" class="hidden">
+                        <img id="qr-image" alt="2FA QR code" class="qr-image">
+                        <p id="twofa-secret" class="small-note"></p>
+                        <form id="verify-form">
+                            <label for="otp">AUTHENTICATION CODE</label>
+                            <input id="otp" inputmode="numeric" placeholder="Enter 6-digit code" required>
+                            <button class="primary-btn" type="submit">VERIFY CODE</button>
+                        </form>
+                        <p id="twofa-message" class="message"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel activity-panel">
+                <div class="panel-heading">
+                    <h3>Security Activity</h3>
+                    <span class="mini-tag">SESSION</span>
+                </div>
+                <div id="activity-log">
+                    <div class="activity-item">
+                        <span class="status-dot"></span>
+                        <span>Successful login</span>
+                        <span class="activity-time">Just now</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>ZERO TRUST BOUNCER <span>•</span> SECURITY DEMONSTRATION PROJECT</footer>
+    <script src="script.js"></script>
+</body>
+</html>
